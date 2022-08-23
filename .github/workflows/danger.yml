@@ -1,0 +1,15 @@
+on:
+  workflow_call:
+
+name: danger
+
+jobs:
+  danger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: danger
+        uses: danger/danger-js@9.1.6
