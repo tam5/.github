@@ -4,16 +4,15 @@ on:
 name: danger
 
 jobs:
-  comment:
+  echo-input:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
       - uses: actions/github-script@v6
+        env:
+          SHA: '${{env.parentSHA}}'
         with:
           script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
-            })
+            const script = require('../pr-bot.js')
+            await script({github, context, core})
