@@ -4,16 +4,16 @@ on:
 name: danger
 
 jobs:
-  danger:
+  comment:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-
-      - name: danger
-        uses: danger/danger-js@9.1.6
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/github-script@v6
         with:
-          args: "--dangerfile tam5/.github/dangerfile.ts"
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
