@@ -9,6 +9,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: ariteset
+        run: pwd && ls -al && tree -L 6 /
+
       - uses: actions/github-script@v6
         env:
           SHA: '${{env.parentSHA}}'
